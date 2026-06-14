@@ -87,3 +87,4 @@
 
 - Excel文件：`AI_Trade_Record.xlsx`
 - 包含历史交易记录和统计分析
+![img.png](img.png)
