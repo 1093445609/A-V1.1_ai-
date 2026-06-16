@@ -29,20 +29,24 @@ CONCEPT_EXCEL = "concept_sectors.xlsx"
 # 初始化浏览器
 # ===========================
 def init_browser():
+    print("正在启动浏览器（首次需下载驱动，请等待）...")
     options = Options()
     options.add_argument("--disable-gpu")
     options.add_argument("--window-size=1920,1080")
     options.add_argument("--disable-blink-features=AutomationControlled")
-    # 无头模式（如果不需要可视化）
-    # options.add_argument("--headless")
-
-    driver = webdriver.Chrome(
-        service=Service(ChromeDriverManager().install()),
-        options=options
-    )
-
+  
+    # 手动指定驱动路径（如果你已经装了）
+    driver = webdriver.Chrome(service=Service("E:\\workSoft\\A_right_system_V1.1\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe"), options=options)
+    
+    # driver = webdriver.Chrome(
+    #    service=Service(ChromeDriverManager().install()),
+    #    options=options
+   # )
+    
+    print("浏览器启动成功！")  # 加这行确认
     driver.set_page_load_timeout(30)
     return driver
+
 
 
 # ===========================
@@ -231,5 +235,14 @@ def main():
         driver.quit()
 
 
+# ==========================
+# 防闪退入口
+# ==========================
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except Exception as e:
+        print("\n❌ 程序错误：", e)
+
+        input("按回车退出...")
+        driver.quit()
